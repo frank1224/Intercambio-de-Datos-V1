@@ -206,6 +206,83 @@ public void registrarLugar(String nombre, String telefono, String direccion){
 	}
 
 }
+
+public void BorrarEmpleado(String EMP)throws SQLException {
+	
+	try {
+		String[] querys = new String[1];
+		querys[0] = "DELETE FROM proteccioncivil.Empleado WHERE codinterno = '"+EMP+"'";
+		
+		PreparedStatement stmt;
+		for(int i = 0; i < querys.length; i++){
+		stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
+		stmt.executeUpdate();
+		}
+		cargarDatosTablas();
+		} catch (Exception e) {
+		System.out.println("Borrado");
+		}
+	}
+
+
+public void BorrarNotificacion(String NOT)throws SQLException {
+	
+	try {
+		String[] querys = new String[1];
+		querys[0] = "DELETE FROM proteccioncivil.Notificacion WHERE codnotificacion = '"+NOT+"'";
+		
+		PreparedStatement stmt;
+		for(int i = 0; i < querys.length; i++){
+		stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
+		stmt.executeUpdate();
+		}
+		cargarDatosTablas();
+		} catch (Exception e) {
+		System.out.println("Borrado");
+		}
+	}
+
+
+
+
+
+public void BorrarLugar(String LUG)throws SQLException {
+	
+	try {
+		String[] querys = new String[1];
+		querys[0] = "DELETE FROM proteccioncivil.Instalacion WHERE codparque = '"+LUG+"'";
+		
+		PreparedStatement stmt;
+		for(int i = 0; i < querys.length; i++){
+		stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
+		stmt.executeUpdate();
+		}
+		cargarDatosTablas();
+		} catch (Exception e) {
+		System.out.println("Borrado");
+		}
+	}
+
+public void BorrarTodoLugar (){
+	
+	try {
+		String[] querys = new String[1];
+		querys[0] = "DELETE FROM proteccioncivil.Instalacion";		
+		
+		PreparedStatement stmt;
+		for(int i = 0; i < querys.length; i++){
+		stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
+		stmt.executeUpdate();
+		}
+		cargarDatosTablas();
+		} catch (Exception e) {
+		System.out.println("Borrado");
+		}
+	}
+
+	
+
+
 	
 	
 	public String[][] getDatosEmpleado() {

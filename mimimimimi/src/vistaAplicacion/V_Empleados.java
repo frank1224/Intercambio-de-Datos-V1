@@ -1,6 +1,8 @@
 package vistaAplicacion;
 
 import java.awt.event.*;
+import java.sql.SQLException;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -49,6 +51,17 @@ public class V_Empleados extends JFrame{
 			}
 		});
 		BtnEliminar = new JButton("Eliminar");
+		BtnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controlador.BorrarEmpleado();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		lblFiltro = new JLabel("Filtro de Búsqueda");
 		btnBuscar = new JButton("Buscar");
 		BtnLimpiar = new JButton("Limpiar");

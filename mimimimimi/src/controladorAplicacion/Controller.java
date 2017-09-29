@@ -123,6 +123,36 @@ public class Controller {
 		}
 	}
 	
+	public void BorrarEmpleado() throws SQLException{
+		int row1 = vistaEmp.getTable().getSelectedRow();
+		String EMP = (String)vistaEmp.getTable().getValueAt(row1, 0);
+		database.BorrarEmpleado(EMP);
+		
+	}
+	
+	
+	public void BorrarNotificacion() throws SQLException{
+		int row1 = vistNot.getTable().getSelectedRow();
+		String NOT = (String)vistNot.getTable().getValueAt(row1, 0);
+		database.BorrarNotificacion(NOT);
+		
+	}
+	
+	
+	public void BorrarLugar() throws SQLException{
+		int row1 = visLug.getTable().getSelectedRow();
+		String LUG = (String)visLug.getTable().getValueAt(row1, 0);
+		database.BorrarLugar(LUG);
+		
+	}
+	
+	public void BorrarTodoLugar() throws SQLException{
+		database.BorrarTodoLugar();
+		
+	}
+	
+	
+	
 	public void cambiarModificarNot(){
 		vistaMN.setVisible(true);
 	}

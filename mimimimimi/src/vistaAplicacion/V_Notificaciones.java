@@ -1,6 +1,8 @@
 package vistaAplicacion;
 
 import java.awt.event.*;
+import java.sql.SQLException;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,6 +46,17 @@ public class V_Notificaciones extends JFrame {
 		table = new JTable();
 		btnModificar = new JButton("Modificar");
 		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controlador.BorrarNotificacion();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
         lblFiltro = new JLabel("Filtro de Búsqueda");
         btnBuscar = new JButton("Buscar");
         btnLimpiar = new JButton("Limpiar");

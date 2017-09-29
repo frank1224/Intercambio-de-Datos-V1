@@ -1,6 +1,8 @@
 package vistaAplicacion;
 
 import java.awt.event.*;
+import java.sql.SQLException;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,8 +44,19 @@ public class V_Lugares extends JFrame{
         btnLugares = new JButton("Lugares");
         scrollPane = new JScrollPane();
 		table = new JTable();
-        btnModificar = new JButton("Modificar");
+        btnModificar = new JButton("Eliminar todo");
         btnEliminar = new JButton("Eliminar");
+        btnEliminar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	try {
+				controlador.BorrarLugar();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        		
+        	}
+        });
         lblFiltro = new JLabel("Filtro de Búsqueda");
         btnBuscar = new JButton("Buscar");
         btnLimpiar = new JButton("Limpiar");
@@ -76,12 +89,18 @@ public class V_Lugares extends JFrame{
         scrollPane.setBounds(27, 193, 673, 242);
         getContentPane().add(scrollPane);
         
-        btnModificar.setBounds(710, 353, 89, 23);
+        btnModificar.setBounds(710, 353, 120, 23);
         getContentPane().add(btnModificar);
-        btnModificar.setEnabled(false);
+        btnModificar.setEnabled(true);
         btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controlador.cambiarModificarLg();
+				//controlador.cambiarModificarLg();
+				try {
+					controlador.BorrarTodoLugar();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
         
