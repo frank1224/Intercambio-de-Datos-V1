@@ -223,7 +223,7 @@ public void BorrarEmpleado(String EMP)throws SQLException {
 		System.out.println("Borrado");
 		}
 	}
-
+        
 
 public void BorrarNotificacion(String NOT)throws SQLException {
 	
@@ -234,7 +234,7 @@ public void BorrarNotificacion(String NOT)throws SQLException {
 		PreparedStatement stmt;
 		for(int i = 0; i < querys.length; i++){
 		stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
-		stmt.executeUpdate();
+		stmt.executeUpdate(); 
 		}
 		cargarDatosTablas();
 		} catch (Exception e) {
@@ -279,8 +279,41 @@ public void BorrarTodoLugar (){
 		System.out.println("Borrado");
 		}
 	}
-
 	
+public void BorrarTodoNotificacion (){
+	
+	try {
+		String[] querys = new String[1];
+		querys[0] = "DELETE FROM proteccioncivil.Notificacion";		
+		
+		PreparedStatement stmt;
+		for(int i = 0; i < querys.length; i++){
+		stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
+		stmt.executeUpdate();
+		}
+		cargarDatosTablas();
+		} catch (Exception e) {
+		System.out.println("Borrado");
+		}
+	}
+	
+
+public void BorrarTodoEmpleado (){
+	
+	try {
+		String[] querys = new String[1];
+		querys[0] = "DELETE FROM proteccioncivil.Empleado";		
+		
+		PreparedStatement stmt;
+		for(int i = 0; i < querys.length; i++){
+		stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
+		stmt.executeUpdate();
+		}
+		cargarDatosTablas();
+		} catch (Exception e) {
+		System.out.println("Borrado");
+		}
+	}
 
 
 	

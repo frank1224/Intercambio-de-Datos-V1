@@ -96,10 +96,10 @@ public class Controller {
 	public void mostrarBotonVistaNot() {
 		if (vistNot.getTable().getSelectedRow() != -1 && vistNot.getTable().getModel().getValueAt(vistNot.getTable().getSelectedRow(),vistNot.getTable().getSelectedColumn()) != null) {
 			vistNot.getBtnEliminar().setEnabled(true);
-			vistNot.getBtnModificar().setEnabled(true);
+			//vistNot.getBtnModificar().setEnabled(true);
 		} else {
 			vistNot.getBtnEliminar().setEnabled(false);
-			vistNot.getBtnModificar().setEnabled(false);
+		//	vistNot.getBtnModificar().setEnabled(false);
 		}
 		if(vistNot.getBusquedatxt().getText().length() != 0) {
 			vistNot.getBtnLimpiar().setEnabled(true);
@@ -111,10 +111,10 @@ public class Controller {
 	public void mostrarBotonvistaEmp() {
 		if (vistaEmp.getTable().getSelectedRow() != -1 && vistaEmp.getTable().getModel().getValueAt(vistaEmp.getTable().getSelectedRow(),vistaEmp.getTable().getSelectedColumn()) != null) {
 			vistaEmp.getbtnEliminar().setEnabled(true);
-			vistaEmp.getbtnModificar().setEnabled(true);
+			//vistaEmp.getbtnModificar().setEnabled(true);
 		} else {
 			vistaEmp.getbtnEliminar().setEnabled(false);
-			vistaEmp.getbtnModificar().setEnabled(false);
+			//vistaEmp.getbtnModificar().setEnabled(false);
 		}
 		if(vistaEmp.getTextField().getText().length() != 0) {
 			vistaEmp.getbtnLimpiar().setEnabled(true);
@@ -150,6 +150,17 @@ public class Controller {
 		database.BorrarTodoLugar();
 		
 	}
+	
+	public void BorrarTodoNotificacion() throws SQLException{
+		database.BorrarTodoNotificacion();
+		
+	}
+	
+	public void BorrarTodoEmpleado() throws SQLException{
+		database.BorrarTodoEmpleado();
+		
+	}
+	
 	
 	
 	

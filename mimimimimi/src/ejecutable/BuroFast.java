@@ -21,7 +21,7 @@ public class BuroFast{
 	public static void main(String[] args) { 
 		V_Lugares ventanaLg = new V_Lugares();
 		V_Notificaciones ventanaNot = new V_Notificaciones();
-		V_ModificarNotificacion ventanaMN = new V_ModificarNotificacion();
+		V_ModificarNotificacion ventanaMN = new V_ModificarNotificacion(); 
 		V_RegistrarNotificacion ventanaRN = new V_RegistrarNotificacion();
 		V_RegistrarEmpleado ventanaRE = new V_RegistrarEmpleado();
 		V_RegistrarLugar ventanaRL = new V_RegistrarLugar();

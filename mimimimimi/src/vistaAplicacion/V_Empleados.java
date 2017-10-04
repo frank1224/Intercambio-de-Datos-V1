@@ -19,7 +19,6 @@ public class V_Empleados extends JFrame{
 	protected JTable table;
 	private JLabel lblFiltro;
 	private JButton btnBuscar;
-	protected JButton BtnModificar;
 	protected JButton BtnEliminar;
 	private JLabel lblCampoBsqueda;
 	protected JTextField textField;
@@ -27,6 +26,7 @@ public class V_Empleados extends JFrame{
 	private JButton btnAmpliar;
 	private JComboBox<String> registros;
 	private JButton btnRegistrar;
+	private JButton button;
 
 	public V_Empleados() {
 		initComponents();
@@ -44,12 +44,6 @@ public class V_Empleados extends JFrame{
 		btnLugares = new JButton("Lugares");
 		scrollPane = new JScrollPane();
 		table = new JTable();
-		BtnModificar = new JButton("Modificar");
-		BtnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controlador.cambiarModificarEmp();
-			}
-		});
 		BtnEliminar = new JButton("Eliminar");
 		BtnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,10 +91,6 @@ public class V_Empleados extends JFrame{
 
 		scrollPane.setBounds(27, 193, 673, 242);
 		getContentPane().add(scrollPane);
-
-		BtnModificar.setBounds(710, 353, 89, 23);
-		getContentPane().add(BtnModificar);
-		BtnModificar.setEnabled(false);
 
 		BtnEliminar.setBounds(710, 398, 89, 23);
 		getContentPane().add(BtnEliminar);
@@ -154,6 +144,21 @@ public class V_Empleados extends JFrame{
 		btnRegistrar.setEnabled(true);
 		btnRegistrar.setBounds(712, 307, 89, 23);
 		getContentPane().add(btnRegistrar);
+		
+		button = new JButton("Eliminar todo");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controlador.BorrarTodoEmpleado();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		button.setEnabled(true);
+		button.setBounds(712, 356, 120, 23);
+		getContentPane().add(button);
 	}
 
 	//PARA AÑADIR
@@ -183,9 +188,9 @@ public class V_Empleados extends JFrame{
 	public JTable getTable() {
 		return table;
 	}
-	public JButton getbtnModificar() {
+	/*public JButton getbtnModificar() {
 		return BtnModificar;
-	}
+	}*/
 	public JButton getbtnEliminar() {
 		return BtnEliminar;
 	}

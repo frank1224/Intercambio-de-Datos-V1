@@ -19,7 +19,6 @@ public class V_Notificaciones extends JFrame {
 	private JLabel lblFiltro;
 	private JButton btnBuscar;
 	private JButton btnRegistrar;
-	protected JButton btnModificar;
 	protected JButton btnEliminar;
 	private JLabel lblCampoBsqueda;
 	protected JTextField busquedatxt;
@@ -44,7 +43,6 @@ public class V_Notificaciones extends JFrame {
         btnActividades = new JButton("Lugares");
         scrollPane = new JScrollPane();
 		table = new JTable();
-		btnModificar = new JButton("Modificar");
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -89,15 +87,6 @@ public class V_Notificaciones extends JFrame {
         
         scrollPane.setBounds(27, 193, 673, 242);
         getContentPane().add(scrollPane);
-        
-        btnModificar.setBounds(710, 353, 89, 23);
-        getContentPane().add(btnModificar);
-        btnModificar.setEnabled(false);
-        btnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controlador.cambiarModificarNot();
-			}
-		});
         
         btnEliminar.setBounds(710, 398, 89, 23);
         getContentPane().add(btnEliminar);
@@ -155,6 +144,21 @@ public class V_Notificaciones extends JFrame {
                 }
             ));
         scrollPane.setViewportView(table);  
+        
+        JButton button = new JButton("Eliminar todo");
+        button.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+					controlador.BorrarTodoNotificacion();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+        	}
+        });
+        button.setEnabled(true);
+        button.setBounds(712, 355, 120, 23);
+        getContentPane().add(button);
 	}
 	//PARA AÑADIR
 	public void setNotificacion(Object[][] tabla) {
@@ -174,9 +178,9 @@ public class V_Notificaciones extends JFrame {
 		return table;
 	}
 
-	public JButton getBtnModificar() {
+	/*public JButton getBtnModificar() {
 		return btnModificar;
-	}
+	}*/
 
 	public JButton getBtnEliminar() {
 		return btnEliminar;
