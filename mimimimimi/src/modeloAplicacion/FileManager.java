@@ -1,5 +1,10 @@
 package modeloAplicacion;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -55,7 +60,25 @@ public class FileManager implements AccesoDatos {
 
 	@Override
 	public void escribeTodos(String[][] listaDatos) {
-		
+		Writer writer = null;
+
+		try {
+		    writer = new BufferedWriter(new OutputStreamWriter(
+		          new FileOutputStream("datos.txt"), "utf-8"));
+		    writer.write("Codigo: ");
+		    ((BufferedWriter) writer).newLine();
+		    writer.write("Nombre: ");
+		    ((BufferedWriter) writer).newLine();
+		    writer.write("Direccion: ");
+		    ((BufferedWriter) writer).newLine();
+		    writer.write("Telefono: ");
+		    
+		} catch (IOException ex) {
+		  // report
+		} finally {
+		   try {writer.close();} catch (Exception ex) {/*ignore*/}
+		}
+	
 		return;
 		// TODO Auto-generalited method stub
 		

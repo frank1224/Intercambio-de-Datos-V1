@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import controladorAplicacion.Controller;
+import modeloAplicacion.FileManager;
 
 @SuppressWarnings("serial")
 public class V_Lugares extends JFrame{
@@ -25,6 +26,7 @@ public class V_Lugares extends JFrame{
 	private JTextField busquedatxt;
 	private JButton btnLimpiar;
 	private JComboBox<String> registros;
+	private FileManager filemanager;
 	
 	public V_Lugares() {
 		initComponents();
@@ -158,7 +160,8 @@ public class V_Lugares extends JFrame{
         JButton btnCargarTxt = new JButton("Cargar txt");
         btnCargarTxt.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		
+        	
+        		filemanager.escribeTodos(null);
         		
         	}
         });

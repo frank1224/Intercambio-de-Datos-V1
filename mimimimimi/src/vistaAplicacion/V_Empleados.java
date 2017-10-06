@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import controladorAplicacion.Controller;
-
+import modeloAplicacion.FileManager;
 @SuppressWarnings("serial")
 public class V_Empleados extends JFrame{
 	private Controller controlador;
@@ -27,6 +27,7 @@ public class V_Empleados extends JFrame{
 	private JButton btnRegistrar;
 	private JButton button;
 	private JButton btnCargarTxt;
+	private FileManager filemanager;
 
 	public V_Empleados() {
 		initComponents();
@@ -159,6 +160,7 @@ public class V_Empleados extends JFrame{
 		btnCargarTxt = new JButton("Cargar txt");
 		btnCargarTxt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				filemanager.escribeTodos(null);
 				
 				
 			}
