@@ -15,53 +15,67 @@ public class Modelo {
 	private String database = "proteccioncivil";
 	private String user = "root";
 	private String pwd = "";
-	private String url = "jdbc:mysql://localhost/" 
-	+ database;
+	private String url = "jdbc:mysql://localhost/" + database;
 	private Connection connect;
-	
-	private String [][] ArraydatosEmpleado;
+
+	private String[][] ArraydatosEmpleado;
 	private V_Empleados VAsociacion;
-	private String [][] ArraydatosLugar;
+	private String[][] ArraydatosLugar;
 	private V_Lugares VActividades;
-	private String [][] ArraydatosNotificacion;
+	private String[][] ArraydatosNotificacion;
 	private V_Notificaciones VSubvencion;
 	private V_RegistrarLugar RLugar;
 	private V_RegistrarNotificacion RNotificacion;
 	private V_RegistrarEmpleado REmpleado;
-	
-	
-	
-	public Modelo(){
-		try{
+	private AccesoDatos ACdatos;
+	private BDManager BDmanager;
+
+	public Modelo() {
+		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connect = DriverManager.getConnection(url,user,pwd);
+			connect = DriverManager.getConnection(url, user, pwd);
 			System.out.println("Database connection enabled");
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			System.out.println("Could not connect with database");
 			e.printStackTrace();
 		}
 	}
 	/*
-	public void getDataAso(int row){
-		try{
-			String query = "SELECT * FROM asociacion";
-			Statement stmt = connect.createStatement();
-			ResultSet rset = stmt.executeQuery(query);
-			while(rset.next()){
-				System.out.println(rset.getString(row));
-			}
-			rset.close();
-			stmt.close();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-	*/
+	 * public void getDataAso(int row){ try{ String query =
+	 * "SELECT * FROM asociacion"; Statement stmt = connect.createStatement();
+	 * ResultSet rset = stmt.executeQuery(query); while(rset.next()){
+	 * System.out.println(rset.getString(row)); } rset.close(); stmt.close();
+	 * }catch(Exception e){ e.printStackTrace(); } }
+	 */
+
 	
+
+	
+
+public void intercambiaDatos(){
+
+	String[][] ArraydatosLugar;
+	
+	
+//HashMap<entidad> lista;
+
+/* Se podría hacer new de cualquier clase que implemente la interface */
+
+AccesoDatos emisor = new BDManager();
+
+AccesoDatos receptor = new FileManager();
+
+ArraydatosLugar = emisor.leeTodos();
+
+receptor.escribeTodos(ArraydatosLugar);
+
+}
+
+
+
 	public void DataEmpl() {
 		try {
-			//String query = "Select * from gestionAsociaciones.asociacion";
+			// String query = "Select * from gestionAsociaciones.asociacion";
 			String query = "Select * from proteccioncivil.Empleado";
 			Statement stmt = connect.createStatement();
 			ResultSet rset = stmt.executeQuery(query);
@@ -86,38 +100,36 @@ public class Modelo {
 			s.printStackTrace();
 		}
 	}
-	
-	public void registrarEmpleado( String dni, String nombre, String apellido, String fechanaciemiento){
+
+	public void registrarEmpleado(String dni, String nombre, String apellido, String fechanaciemiento) {
 		try {
 			String sql = "Insert into proteccioncivil.Empleado (`dni`,`nombre`,`apellido`,`fechanaciemiento`) values (?, ?, ?, ?)";
-		
-			//String sql2 = "Insert into proteccioncivil.asigna (`codinterno`,`codparque`) values (?, ?)";
-			
+
+			// String sql2 = "Insert into proteccioncivil.asigna
+			// (`codinterno`,`codparque`) values (?, ?)";
+
 			PreparedStatement stmt = connect.prepareStatement(sql);
-			//PreparedStatement stmt2 = connect.prepareStatement(sql2);
-			
-			
-			
-			//stmt2.setString(1, codigointerno2);
+			// PreparedStatement stmt2 = connect.prepareStatement(sql2);
+
+			// stmt2.setString(1, codigointerno2);
 			stmt.setString(1, dni);
-			//stmt2.setString(2, codparque);
+			// stmt2.setString(2, codparque);
 			stmt.setString(2, nombre);
 			stmt.setString(3, apellido);
 			stmt.setString(4, fechanaciemiento);
-			
+
 			stmt.executeUpdate();
-			//stmt2.executeUpdate();
+			// stmt2.executeUpdate();
 			stmt.close();
-			//stmt2.close();
+			// stmt2.close();
 			cargarDatosTablas();
 			cargarDatosTablas();
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
-		
-		
+
 	}
-	
+
 	public void DataInsta() {
 		try {
 			String query = "Select * from proteccioncivil.instalacion";
@@ -144,8 +156,7 @@ public class Modelo {
 			s.printStackTrace();
 		}
 	}
-	
-	
+
 	public void DataNotifi() {
 		try {
 			String query = "Select * from proteccioncivil.notificacion";
@@ -169,15 +180,16 @@ public class Modelo {
 			rset.close();
 			stmt.close();
 		} catch (SQLException s) {
-			s.printStackTrace(); 
+			s.printStackTrace();
 		}
 	}
-public void registrarNotificacion(String direccion, String urgencia, String tipo){
-		
-		try { 
+
+	public void registrarNotificacion(String direccion, String urgencia, String tipo) {
+
+		try {
 			String sql = "Insert into proteccioncivil.Notificacion (`direccion`,`urgencia`,`tipo`) values ( ?, ?,?)";
 			PreparedStatement stmt = connect.prepareStatement(sql);
-			
+
 			stmt.setString(1, direccion);
 			stmt.setString(2, urgencia);
 			stmt.setString(3, tipo);
@@ -187,146 +199,144 @@ public void registrarNotificacion(String direccion, String urgencia, String tipo
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
-	
-	}
-public void registrarLugar(String nombre, String telefono, String direccion){
-	/*INSERT INTO `Instalacion` (`codparque`, `nombre`, `telefono`, `direccion`) VALUES ('3', 'parque3', '982323', 'parque333');*/
-	try {
-		String sql = "Insert into proteccioncivil.Instalacion (`nombre`,`telefono`,`direccion`) values (?, ?, ?)";
-		PreparedStatement stmt = connect.prepareStatement(sql);
-		
-		stmt.setString(1, nombre);
-		stmt.setString(2, telefono);
-		stmt.setString(3, direccion);
-		stmt.executeUpdate();
-		stmt.close();
-		cargarDatosTablas();
-	} catch (SQLException s) {
-		s.printStackTrace();
+
 	}
 
-}
+	public void registrarLugar(String nombre, String telefono, String direccion) {
+		/*
+		 * INSERT INTO `Instalacion` (`codparque`, `nombre`, `telefono`,
+		 * `direccion`) VALUES ('3', 'parque3', '982323', 'parque333');
+		 */
+		try {
+			String sql = "Insert into proteccioncivil.Instalacion (`nombre`,`telefono`,`direccion`) values (?, ?, ?)";
+			PreparedStatement stmt = connect.prepareStatement(sql);
 
-public void BorrarEmpleado(String EMP)throws SQLException {
-	
-	try {
-		String[] querys = new String[1];
-		querys[0] = "DELETE FROM proteccioncivil.Empleado WHERE codinterno = '"+EMP+"'";
-		
-		PreparedStatement stmt;
-		for(int i = 0; i < querys.length; i++){
-		stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
-		stmt.executeUpdate();
+			stmt.setString(1, nombre);
+			stmt.setString(2, telefono);
+			stmt.setString(3, direccion);
+			stmt.executeUpdate();
+			stmt.close();
+			cargarDatosTablas();
+		} catch (SQLException s) {
+			s.printStackTrace();
 		}
-		cargarDatosTablas();
+
+	}
+
+	public void BorrarEmpleado(String EMP) throws SQLException {
+
+		try {
+			String[] querys = new String[1];
+			querys[0] = "DELETE FROM proteccioncivil.Empleado WHERE codinterno = '" + EMP + "'";
+
+			PreparedStatement stmt;
+			for (int i = 0; i < querys.length; i++) {
+				stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
+				stmt.executeUpdate();
+			}
+			cargarDatosTablas();
 		} catch (Exception e) {
-		System.out.println("Borrado");
+			System.out.println("Borrado");
 		}
 	}
-        
 
-public void BorrarNotificacion(String NOT)throws SQLException {
-	
-	try {
-		String[] querys = new String[1];
-		querys[0] = "DELETE FROM proteccioncivil.Notificacion WHERE codnotificacion = '"+NOT+"'";
-		
-		PreparedStatement stmt;
-		for(int i = 0; i < querys.length; i++){
-		stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
-		stmt.executeUpdate(); 
-		}
-		cargarDatosTablas();
+	public void BorrarNotificacion(String NOT) throws SQLException {
+
+		try {
+			String[] querys = new String[1];
+			querys[0] = "DELETE FROM proteccioncivil.Notificacion WHERE codnotificacion = '" + NOT + "'";
+
+			PreparedStatement stmt;
+			for (int i = 0; i < querys.length; i++) {
+				stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
+				stmt.executeUpdate();
+			}
+			cargarDatosTablas();
 		} catch (Exception e) {
-		System.out.println("Borrado");
+			System.out.println("Borrado");
 		}
 	}
 
+	public void BorrarLugar(String LUG) throws SQLException {
 
+		try {
+			String[] querys = new String[1];
+			querys[0] = "DELETE FROM proteccioncivil.Instalacion WHERE codparque = '" + LUG + "'";
 
-
-
-public void BorrarLugar(String LUG)throws SQLException {
-	
-	try {
-		String[] querys = new String[1];
-		querys[0] = "DELETE FROM proteccioncivil.Instalacion WHERE codparque = '"+LUG+"'";
-		
-		PreparedStatement stmt;
-		for(int i = 0; i < querys.length; i++){
-		stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
-		stmt.executeUpdate();
-		}
-		cargarDatosTablas();
+			PreparedStatement stmt;
+			for (int i = 0; i < querys.length; i++) {
+				stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
+				stmt.executeUpdate();
+			}
+			cargarDatosTablas();
 		} catch (Exception e) {
-		System.out.println("Borrado");
+			System.out.println("Borrado");
 		}
 	}
 
-public void BorrarTodoLugar (){
-	
-	try {
-		String[] querys = new String[1];
-		querys[0] = "DELETE FROM proteccioncivil.Instalacion";		
-		
-		PreparedStatement stmt;
-		for(int i = 0; i < querys.length; i++){
-		stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
-		stmt.executeUpdate();
-		}
-		cargarDatosTablas();
+	public void BorrarTodoLugar() {
+
+		try {
+			String[] querys = new String[1];
+			querys[0] = "DELETE FROM proteccioncivil.Instalacion";
+
+			PreparedStatement stmt;
+			for (int i = 0; i < querys.length; i++) {
+				stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
+				stmt.executeUpdate();
+			}
+			cargarDatosTablas();
 		} catch (Exception e) {
-		System.out.println("Borrado");
+			System.out.println("Borrado");
 		}
 	}
-	
-public void BorrarTodoNotificacion (){
-	
-	try {
-		String[] querys = new String[1];
-		querys[0] = "DELETE FROM proteccioncivil.Notificacion";		
-		
-		PreparedStatement stmt;
-		for(int i = 0; i < querys.length; i++){
-		stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
-		stmt.executeUpdate();
-		}
-		cargarDatosTablas();
+
+	public void BorrarTodoNotificacion() {
+
+		try {
+			String[] querys = new String[1];
+			querys[0] = "DELETE FROM proteccioncivil.Notificacion";
+
+			PreparedStatement stmt;
+			for (int i = 0; i < querys.length; i++) {
+				stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
+				stmt.executeUpdate();
+			}
+			cargarDatosTablas();
 		} catch (Exception e) {
-		System.out.println("Borrado");
+			System.out.println("Borrado");
 		}
 	}
-	
 
-public void BorrarTodoEmpleado (){
-	
-	try {
-		String[] querys = new String[1];
-		querys[0] = "DELETE FROM proteccioncivil.Empleado";		
-		
-		PreparedStatement stmt;
-		for(int i = 0; i < querys.length; i++){
-		stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
-		stmt.executeUpdate();
-		}
-		cargarDatosTablas();
+	public void BorrarTodoEmpleado() {
+
+		try {
+			String[] querys = new String[1];
+			querys[0] = "DELETE FROM proteccioncivil.Empleado";
+
+			PreparedStatement stmt;
+			for (int i = 0; i < querys.length; i++) {
+				stmt = (PreparedStatement) connect.prepareStatement(querys[i]);
+				stmt.executeUpdate();
+			}
+			cargarDatosTablas();
 		} catch (Exception e) {
-		System.out.println("Borrado");
+			System.out.println("Borrado");
 		}
 	}
 
-
-	
-	
 	public String[][] getDatosEmpleado() {
+		String[] arrDatosUnEmpleado = ArraydatosEmpleado[0];
+
+		String nombre = arrDatosUnEmpleado[1];
+
 		return ArraydatosEmpleado;
 	}
 
 	public void setDatosEmpleado(V_Empleados empleado) {
 		this.VAsociacion = empleado;
 	}
-	
-	
+
 	public String[][] getArraydatosInstalacion() {
 		return ArraydatosLugar;
 	}
@@ -334,7 +344,6 @@ public void BorrarTodoEmpleado (){
 	public void setDatosLugar(V_Lugares lugar) {
 		this.VActividades = lugar;
 	}
-	
 
 	public String[][] getArrayNotificacion() {
 		return ArraydatosNotificacion;
@@ -343,28 +352,27 @@ public void BorrarTodoEmpleado (){
 	public void setDatosNotificacion(V_Notificaciones notificacion) {
 		this.VSubvencion = notificacion;
 	}
-	
+
 	public void setRLugar(V_RegistrarLugar rLugar) {
 		this.RLugar = rLugar;
 	}
-	
+
 	public void setRNotificacion(V_RegistrarNotificacion rNotificacion) {
 		this.RNotificacion = rNotificacion;
 	}
-	
+
 	public void setREmpleado(V_RegistrarEmpleado rEmpleado) {
 		this.REmpleado = rEmpleado;
 	}
 
-	public void cargarDatosTablas(){
+	public void cargarDatosTablas() {
 		this.DataEmpl();
 		VAsociacion.setEmpleado(ArraydatosEmpleado);
 		this.DataInsta();
 		VActividades.setLugar(ArraydatosLugar);
 		this.DataNotifi();
 		VSubvencion.setNotificacion(ArraydatosNotificacion);
-	
+
 	}
-	
-	
+
 }

@@ -23,8 +23,8 @@ public class V_Notificaciones extends JFrame {
 	private JLabel lblCampoBsqueda;
 	protected JTextField busquedatxt;
 	protected JButton btnLimpiar;
-	private JButton btnAmpliar;
 	private JComboBox<String> registros;
+	private JButton btnCargarTxt;
 	
 	public V_Notificaciones() {
 		initComponents();
@@ -59,7 +59,6 @@ public class V_Notificaciones extends JFrame {
         btnBuscar = new JButton("Buscar");
         btnLimpiar = new JButton("Limpiar");
         btnRegistrar = new JButton("Registrar");
-        btnAmpliar = new JButton("Ampliar");
         lblCampoBsqueda = new JLabel("Campo Búsqueda");
         busquedatxt = new JTextField();
         registros = new JComboBox<String>();
@@ -113,9 +112,6 @@ public class V_Notificaciones extends JFrame {
         lblCampoBsqueda.setBounds(296, 121, 108, 14);
         getContentPane().add(lblCampoBsqueda);
         
-        btnAmpliar.setBounds(710, 196, 89, 23);
-        getContentPane().add(btnAmpliar);
-        
         busquedatxt.setBounds(408, 117, 108, 23);
         getContentPane().add(busquedatxt);
         busquedatxt.setColumns(10);
@@ -159,6 +155,15 @@ public class V_Notificaciones extends JFrame {
         button.setEnabled(true);
         button.setBounds(712, 355, 120, 23);
         getContentPane().add(button);
+        
+        btnCargarTxt = new JButton("Cargar txt");
+        btnCargarTxt.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        	}
+        });
+        btnCargarTxt.setBounds(712, 257, 117, 29);
+        getContentPane().add(btnCargarTxt);
 	}
 	//PARA AÑADIR
 	public void setNotificacion(Object[][] tabla) {

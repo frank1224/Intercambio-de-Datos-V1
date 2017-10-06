@@ -24,7 +24,6 @@ public class V_Lugares extends JFrame{
 	private JLabel lblCampoBsqueda;
 	private JTextField busquedatxt;
 	private JButton btnLimpiar;
-	private JButton btnAmpliar;
 	private JComboBox<String> registros;
 	
 	public V_Lugares() {
@@ -61,7 +60,6 @@ public class V_Lugares extends JFrame{
         btnBuscar = new JButton("Buscar");
         btnLimpiar = new JButton("Limpiar");
         btnRegistrar = new JButton("Registrar");
-        btnAmpliar = new JButton("Ampliar");
         lblCampoBsqueda = new JLabel("Campo Búsqueda");
         busquedatxt = new JTextField();
         registros = new JComboBox<String>();
@@ -129,9 +127,6 @@ public class V_Lugares extends JFrame{
         lblCampoBsqueda.setBounds(296, 121, 108, 14);
         getContentPane().add(lblCampoBsqueda);
         
-        btnAmpliar.setBounds(710, 196, 89, 23);
-        getContentPane().add(btnAmpliar);
-        
         busquedatxt.setBounds(408, 117, 108, 23);
         getContentPane().add(busquedatxt);
         busquedatxt.setColumns(10);
@@ -159,6 +154,16 @@ public class V_Lugares extends JFrame{
         	}
         ));
         scrollPane.setViewportView(table);  
+        
+        JButton btnCargarTxt = new JButton("Cargar txt");
+        btnCargarTxt.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		
+        	}
+        });
+        btnCargarTxt.setBounds(712, 256, 117, 29);
+        getContentPane().add(btnCargarTxt);
 	}
 	//PARA AÑADIR
 	public void setLugar(Object[][] tabla) {

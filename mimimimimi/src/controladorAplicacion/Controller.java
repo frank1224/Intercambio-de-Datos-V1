@@ -217,7 +217,7 @@ public class Controller {
 	//PARA AÑADIR
 	public void cargarDatos(){
 		database.cargarDatosTablas();
-		
+		  
 	}
 	
 	

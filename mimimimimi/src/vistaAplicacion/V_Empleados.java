@@ -23,10 +23,10 @@ public class V_Empleados extends JFrame{
 	private JLabel lblCampoBsqueda;
 	protected JTextField textField;
 	protected JButton BtnLimpiar;
-	private JButton btnAmpliar;
 	private JComboBox<String> registros;
 	private JButton btnRegistrar;
 	private JButton button;
+	private JButton btnCargarTxt;
 
 	public V_Empleados() {
 		initComponents();
@@ -59,7 +59,6 @@ public class V_Empleados extends JFrame{
 		lblFiltro = new JLabel("Filtro de Búsqueda");
 		btnBuscar = new JButton("Buscar");
 		BtnLimpiar = new JButton("Limpiar");
-		btnAmpliar = new JButton("Ampliar");
 		lblCampoBsqueda = new JLabel("Campo Búsqueda");
 		textField = new JTextField();
 		textField.addKeyListener(new KeyAdapter() {
@@ -109,9 +108,6 @@ public class V_Empleados extends JFrame{
 		lblCampoBsqueda.setBounds(296, 121, 108, 14);
 		getContentPane().add(lblCampoBsqueda);
 
-		btnAmpliar.setBounds(710, 196, 89, 23);
-		getContentPane().add(btnAmpliar);
-
 		textField.setBounds(408, 117, 108, 23);
 		getContentPane().add(textField);
 		textField.setColumns(10);
@@ -159,6 +155,16 @@ public class V_Empleados extends JFrame{
 		button.setEnabled(true);
 		button.setBounds(712, 356, 120, 23);
 		getContentPane().add(button);
+		
+		btnCargarTxt = new JButton("Cargar txt");
+		btnCargarTxt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		btnCargarTxt.setBounds(712, 252, 117, 29);
+		getContentPane().add(btnCargarTxt);
 	}
 
 	//PARA AÑADIR

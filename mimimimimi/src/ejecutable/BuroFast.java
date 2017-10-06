@@ -15,7 +15,7 @@ import vistaAplicacion.V_Notificaciones;
 
 public class BuroFast{
 	BuroFast() {
-		super(); 
+		super();   
 	}    
 	
 	public static void main(String[] args) { 

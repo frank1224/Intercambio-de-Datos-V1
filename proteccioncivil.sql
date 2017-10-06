@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-09-2017 a las 22:51:26
+-- Tiempo de generación: 06-10-2017 a las 22:41:02
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 7.1.1
 
@@ -31,14 +31,6 @@ CREATE TABLE `asigna` (
   `codparque` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `asigna`
---
-
-INSERT INTO `asigna` (`codinterno`, `codparque`) VALUES
-(1, 1),
-(2, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -59,8 +51,7 @@ CREATE TABLE `Empleado` (
 
 INSERT INTO `Empleado` (`codinterno`, `dni`, `nombre`, `apellido`, `fechanaciemiento`) VALUES
 (1, 'ggg1', 'machina', 'maquina', '01-02-1990'),
-(2, 'ggg2', 'machina2', 'maquina2', '04-09-1989'),
-(3, 'dwdwd3', 'wdwdw', 'wdwdw', '09-03-1934');
+(2, 'ggg2', 'machina2', 'maquina2', '04-09-1989');
 
 -- --------------------------------------------------------
 
@@ -80,13 +71,7 @@ CREATE TABLE `Instalacion` (
 --
 
 INSERT INTO `Instalacion` (`codparque`, `nombre`, `telefono`, `direccion`) VALUES
-(1, 'parque1', '9128383', 'direccion1'),
-(2, 'parque2', '98287287', 'parque2'),
-(3, 'parque3', '982323', 'parque333'),
-(4, 'sdsd', '232323', 'swdwd'),
-(5, 'gg', 'nn', 'kkh'),
-(6, 'gg2', 'nn2', 'kkh2'),
-(7, 'parque4', '87878', 'parque4');
+(12, 'parque1', '9876867', 'cercana');
 
 -- --------------------------------------------------------
 
@@ -106,9 +91,7 @@ CREATE TABLE `Notificacion` (
 --
 
 INSERT INTO `Notificacion` (`codnotificacion`, `direccion`, `urgencia`, `tipo`) VALUES
-(1, 'parque1', 'alta', 'pelea'),
-(2, 'parque2', 'alta', ''),
-(3, 'parque3', 'media', 'Discusion');
+(6, 'Parque1', 'alta', 'Pelea');
 
 -- --------------------------------------------------------
 
@@ -121,14 +104,6 @@ CREATE TABLE `recibe` (
   `codnotificacion` int(11) NOT NULL,
   `fecha_hora` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `recibe`
---
-
-INSERT INTO `recibe` (`codigoparque`, `codnotificacion`, `fecha_hora`) VALUES
-(1, 1, '2017-06-21 13:00:00'),
-(2, 2, '2017-06-12 10:00:00');
 
 --
 -- Índices para tablas volcadas
@@ -174,17 +149,17 @@ ALTER TABLE `recibe`
 -- AUTO_INCREMENT de la tabla `Empleado`
 --
 ALTER TABLE `Empleado`
-  MODIFY `codinterno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `codinterno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `Instalacion`
 --
 ALTER TABLE `Instalacion`
-  MODIFY `codparque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `codparque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `Notificacion`
 --
 ALTER TABLE `Notificacion`
-  MODIFY `codnotificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `codnotificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Restricciones para tablas volcadas
 --
