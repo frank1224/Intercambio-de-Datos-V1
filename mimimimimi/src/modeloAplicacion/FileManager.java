@@ -1,87 +1,92 @@
 package modeloAplicacion;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.Writer;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class FileManager implements AccesoDatos {
 
 	private Connection connect;
-	
+
 	@Override
 	public void addOne(String[] datos) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public String[][] leeTodos() {
 		String[][] auxiliar = null;
-		
-		
+
 		// SELECT * de lugares
-		try {
-			String query = "Select * from proteccioncivil.instalacion";
-			Statement stmt = connect.createStatement();
-			ResultSet rset = stmt.executeQuery(query);
-			ResultSetMetaData rmsd = rset.getMetaData();
-
-			rset.last();
-			int a = rmsd.getColumnCount();
-			int b = rset.getRow();
-			rset.beforeFirst();
-
-			auxiliar = new String[b][a];
-			for (int i = 0; i < b; i++) {
-				if (rset.next()) {
-					for (int j = 0; j < a; j++) {
-						auxiliar[i][j] = rset.getString((j + 1));
-					}
-				}
-			}
-			rset.close();
-			stmt.close();
-		} catch (SQLException s) {
-			s.printStackTrace();
-		}
-		// Recorrer y resultset y meter los datos en auxiliar
-		// TODO Auto-generated method stub
-		
 		return auxiliar;
 	}
-	
+
+	public void muestraContenido(String archivo) throws FileNotFoundException, IOException {
+		String cadena;
+		FileReader f = new FileReader(archivo);
+		BufferedReader b = new BufferedReader(f);
+		while ((cadena = b.readLine()) != null) {
+			System.out.println(cadena);
+
+		}
+		b.close();
+	}
 
 	@Override
 	public void escribeTodos(String[][] listaDatos) {
-		Writer writer = null;
-
-		try {
-		    writer = new BufferedWriter(new OutputStreamWriter(
-		          new FileOutputStream("datos.txt"), "utf-8"));
-		    writer.write("Codigo: ");
-		    ((BufferedWriter) writer).newLine();
-		    writer.write("Nombre: ");
-		    ((BufferedWriter) writer).newLine();
-		    writer.write("Direccion: ");
-		    ((BufferedWriter) writer).newLine();
-		    writer.write("Telefono: ");
-		    
-		} catch (IOException ex) {
-		  // report
-		} finally {
-		   try {writer.close();} catch (Exception ex) {/*ignore*/}
-		}
-	
-		return;
-		// TODO Auto-generalited method stub
 		
-	}
 
+		FileWriter fichero = null;
+		PrintWriter pw = null;
+		try {
+			fichero = new FileWriter("Datos/datos.txt");
+			pw = new PrintWriter(fichero);
+
+			for (int i = 0; i < 10; i++)
+				pw.println("Linea " + i);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// Nuevamente aprovechamos el finally para
+				// asegurarnos que se cierra el fichero.
+				if (null != fichero)
+					fichero.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+public void escribeTodos() {
+		
+
+		FileWriter fichero = null;
+		PrintWriter pw = null;
+		try {
+			fichero = new FileWriter("Datos/datos2.txt");
+			pw = new PrintWriter(fichero);
+
+			for (int i = 0; i < 10; i++)
+				pw.println("Linea " + i);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// Nuevamente aprovechamos el finally para
+				// asegurarnos que se cierra el fichero.
+				if (null != fichero)
+					fichero.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
 }

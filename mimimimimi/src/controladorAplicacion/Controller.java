@@ -2,8 +2,11 @@ package controladorAplicacion;
 
 import javax.swing.JOptionPane;
 
+import modeloAplicacion.FileManager;
 import modeloAplicacion.Modelo;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
 import vistaAplicacion.V_Lugares;
 import vistaAplicacion.V_Empleados;
@@ -33,6 +36,7 @@ public class Controller {
 	private Modelo RLugar;
 	private Modelo RNotificacion;
 	private Modelo REmpleado;
+	private FileManager FManager;
 	
 	
 	public Controller(V_Lugares visLug,V_Notificaciones vistNot,V_ModificarNotificacion vistaMN,V_RegistrarNotificacion vistaRN,V_RegistrarEmpleado vistaRE,V_ModificarLugar vistaML,V_RegistrarLugar vistaRL,V_ModificarEmpleado vistaME,V_Login vistaL,V_Empleados vistaEmp, Modelo database) {
@@ -47,7 +51,18 @@ public class Controller {
 		this.vistaL = vistaL;
 		this.vistaEmp = vistaEmp;
 		this.database = database;
-		
+		this.FManager=new FileManager();
+		try {
+			this.FManager.muestraContenido("Datos/datos.txt"); 
+			this.FManager.escribeTodos();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.exit(-1);
 	}
 
 	public void cambiarEmpleado() {
